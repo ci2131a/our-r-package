@@ -1,0 +1,16 @@
+Package: Rpackage
+Type: Package
+Title: sample
+Version: 0.0.0.9000
+Authors@R: person("First", "Last", email = "handle@email.com",
+                  role = c("aut", "cre"))
+Description: Add a brief package description (1 line)
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+Suggests: 
+    knitr,
+    rmarkdown,
+    testthat (>= 3.0.0)
+VignetteBuilder: knitr
+Config/testthat/edition: 3

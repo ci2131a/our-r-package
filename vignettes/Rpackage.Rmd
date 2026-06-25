@@ -1,0 +1,29 @@
+---
+title: "Rpackage"
+author: Your Name
+date: June 30, 2020
+output: 
+  rmarkdown::html_vignette: default
+vignette: >
+  %\VignetteIndexEntry{sample}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+
+
+# Introduction
+
+This is a sample vignette to document your package.
+
+## Details
+
+Use this document to describe and showcase your package and its functionality.
+
