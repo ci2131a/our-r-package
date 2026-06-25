@@ -1,0 +1,37 @@
+---
+title: "our TODO"
+format: docx
+editor: visual
+---
+
+# General Goals
+
+
+## Theory
+
+- [ ] Review the variance formulation in Freedman
+- [x] Understand Flack and Chang paper
+
+
+
+## Development Code
+
+- [x] Develop a function for Freedman simulation
+- [ ] Write code for Flack simulation
+- [ ] Learn and implement R classes so our simulation functions produce similar output when called by summary or plot
+
+## Documentation
+
+- [ ] Document the current state of Freedman function
+
+
+## Testing
+
+- [ ] Write some tests for checking the freedman function
+
+
+# Things to do by Paper
+
+## Freedman
+
+## Flack
