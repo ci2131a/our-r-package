@@ -1,18 +1,15 @@
 ---
 title: "our TODO"
-format: docx
-editor: visual
+format: html
+embed-resources: true
 ---
 
 # General Goals
-
 
 ## Theory
 
 - [ ] Review the variance formulation in Freedman
 - [x] Understand Flack and Chang paper
-
-
 
 ## Development Code
 
@@ -24,14 +21,16 @@ editor: visual
 
 - [ ] Document the current state of Freedman function
 
-
 ## Testing
 
 - [ ] Write some tests for checking the freedman function
 
-
-# Things to do by Paper
+# Potential Papers and the Things To Do by Paper
 
 ## Freedman
+
+Freedman, D. A. (1983), "A Note on Screening Regression Equations", *The American Statistician*, 37, 152-155.
+
+
 
 ## Flack
