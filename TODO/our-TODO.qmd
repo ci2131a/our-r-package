@@ -25,12 +25,83 @@ embed-resources: true
 
 - [ ] Write some tests for checking the freedman function
 
-# Potential Papers and the Things To Do by Paper
+# Current R packages with Sims
 
-## Freedman
+Lists of current R packages with relevant simulation capabilities.
+
+- [survsim](https://cran.r-project.org/web/packages/survsim/index.html): simple and complex survival data including recurrent and multiple events AND competing risks.
+
+# Potential Papers and the Things To Do for/Thoughts on each Paper
+
+## General simulation Study Design/Theory
+
+### Morris, White, & Crowther
+
+Morris TP, White IR, Crowther MJ. Using simulation studies to evaluate statistical methods. Stat Med. 2019 May 20;38(11):2074-2102. doi: 10.1002/sim.8086. Epub 2019 Jan 16. PMID: 30652356; PMCID: PMC6492164.
+
+## Multiple Linear Regression 
+
+Focusing mostly on variable selection techniques. 
+
+### Freedman
 
 Freedman, D. A. (1983), "A Note on Screening Regression Equations", *The American Statistician*, 37, 152-155.
 
+- Some framing around (1) the expected number of significant variables in the first model to be 12.5 (= $n\times p = 50 \times 0.25$) but that this is *not* a Bin(50,25) because each test is not *independent* and (2) the data as generated do to exactly follow Freedman's theory as the X's are not orthogonal (as is assumed - check this - in the paper's derivations)
 
+### Flack & Chang
 
-## Flack
+Flack, V. F., & Chang, P. C. (1987). Frequency of Selecting Noise Variables in Subset Regression Analysis: A Simulation Study. The American Statistician, 41(1), 84–86. https://doi.org/10.1080/00031305.1987.10475450
+
+- Note that the autocorrelation pattern of the P candidate variables with the stated choice of subscripts would not give a true regression equation as stated. Their $\rho_{ij} = \rho^{j-i+1}$ for $j > i = 1, \cdots, p-1$, but it appears they should have $\rho_{ij} = \rho^{j-i}$ for $j > i = 1, \cdots, p$...  $\rho^{|j-i|}$ can be used for $j \neq i \in 1:p$ which gives an AR(1) correlation matrix which would give their true regression equation and Table 1 $\beta$ coefficients. With their stated $\rho_{ij}$ the true regression equation will be different... we can use simulations to show this!  (But also get the true regression equations analytically... details forthcoming!) 
+
+- Can partially frame this around connections to intro Math/Stat theory (e.g. MVN results).
+
+### Freedman & Pee
+
+Freedman, L. S., & Pee, D. (1989). Return to a Note on Screening Regression Equations. The American Statistician, 43(4), 279–282. https://doi.org/10.1080/00031305.1989.10475675
+
+### Derksen & Keselman
+
+Derksen, S.A., & Keselman, H.J. (1992). Backward, forward and stepwise automated subset selection algorithms: Frequency of obtaining authentic and noise variables. British Journal of Mathematical and Statistical Psychology, 45, 265-282.
+
+### Tibshirani
+
+Robert Tibshirani, Regression Shrinkage and Selection Via the Lasso, Journal of the Royal Statistical Society: Series B (Methodological), Volume 58, Issue 1, January 1996, Pages 267–288, https://doi.org/10.1111/j.2517-6161.1996.tb02080.x
+
+### Hastie, Tibshirani, & Tibshirani
+
+Trevor Hastie, Robert Tibshirani, Ryan Tibshirani. "Best Subset, Forward Stepwise or Lasso? Analysis and Recommendations Based on Extensive Comparisons." Statistical Science, 35(4) 579-592 November 2020.
+https://doi.org/10.1214/19-STS733
+
+## Linear Mixed Models 
+
+- Can compare power between different study designs which incorporate information repeated measures structure vs. not and look at the impact of sample size and within vs between individual variation. 
+
+  For example suppose you have 60 individuals and two choices of experimental design: (1) randomly assign 20 each to the three sessions for vs. (2) measure all 60 at every session.  In both cases you have n = 60 independent sampling units (participants), but in the 2nd case if you include all 3 sessions with the appropriate dependency structure incorporated in a mixed model the effective sample size should be somewhere between 60 and 180. (What this effective sample size is depends on the within-subject correlation and the specific parameter of interest that is being assessed so it is not straightforward to define or even calculate.) 
+
+  So, including all repeated measures across individuals and including a correct dependence structure should give us a larger (effective) sample size which typically increases the precision of our estimates and thus might provide greater power. 
+
+  An alternative design would be to have 180 independent individuals and  randomly assign 60 to each session. Here there is no dependency structure and all 180 observations are independent. Whether this design has more or less power than the repeated-measures design depends on the within-subject correlation and variance structure, so power is not determined solely by the nominal sample size. 
+
+## GLM
+
+## Survival
+
+### Tibshirani
+
+Tibshirani R. The lasso method for variable selection in the Cox model. Stat Med. 1997 Feb 28;16(4):385-95. doi: 10.1002/(sici)1097-0258(19970228)16:4<385::aid-sim380>3.0.co;2-3. PMID: 9044528.
+
+### Bender, Augustin, & Blettner
+
+Bender R, Augustin T, Blettner M. Generating survival times to simulate Cox proportional hazards models. Stat Med. 2005 Jun 15;24(11):1713-23. doi: 10.1002/sim.2059. PMID: 15724232.
+
+### Crowther & Lambert
+
+Crowther MJ, Lambert PC. Simulating biologically plausible complex survival data. Stat Med. 2013 Oct 15;32(23):4118-34. doi: 10.1002/sim.5823. Epub 2013 Apr 23. PMID: 23613458.
+
+## Multistate Models
+
+## Polynomial RV Generation
+
+## Other methods?
