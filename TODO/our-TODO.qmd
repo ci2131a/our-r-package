@@ -23,7 +23,7 @@ embed-resources: true
 
 ## Testing
 
-- [ ] Write some tests for checking the freedman function
+- [ ] Write some tests for checking the Freedman function
 
 # Current R packages with Sims
 
@@ -33,7 +33,7 @@ Lists of current R packages with relevant simulation capabilities.
 
 # Potential Papers and the Things To Do for/Thoughts on each Paper
 
-## General simulation Study Design/Theory
+## General Simulation Study Design/Theory
 
 ### Morris, White, & Crowther
 
@@ -105,3 +105,13 @@ Crowther MJ, Lambert PC. Simulating biologically plausible complex survival data
 ## Polynomial RV Generation
 
 ## Other methods?
+
+# Brainstorming/Spitballing
+
+A place to add ideas for future pursuits, things we should be focusing on, etc. 
+
+- What are possible ways to formulate or spin this for publication(s)?  As educational tools.  As replication of studies.
+- For implementing R classes, what is the "default" output we want returned when a simulation function is run without saving in a variable? For example, the `lm()` function returns the "Call" and the coefficient estimates from the fitted model.  We could return something around time it took to run the given simulation along with some "Call" type of information. 
+- Should we have a simulation approach from the point of view of the "study design" vs. "method applied"?  E.g. generate different study designs:  iid, experimental, cohort, cross-over, longitudinal,... (would have to look up some standard design styles)
+- Long term:  What about involving others?!  In particular, students could contribute around a specific paper as a capstone project. This might be a way to really grow what is covered in the package - new simulations/methods/study designs can be added by different contributors.
+
