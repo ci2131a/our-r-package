@@ -8,7 +8,7 @@ embed-resources: true
 
 ## Theory
 
-- [ ] Review the variance formulation in Freedman
+- [ ] Review the variance formulation in Freedman - the number of significant variables is not a Bin(50,0.25) (50 = number of variables and 0.20 = alpha level of each test of significance) because each test of a variable's significance is not an *independent* trial!  These tests are dependent. The expected number of significant tests is 50\*.25 = 12.5 but the variance is not 50\*.25\*(1-.25) = 9.375 due to the dependence of the tests. We can show this empirically with the simulations. It would be awesome to figure out the theoretical variance thus we need to know *how* the tests are correlated with each other. 
 - [x] Understand Flack and Chang paper
 
 ## Development Code
