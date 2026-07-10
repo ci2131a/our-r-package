@@ -8,7 +8,7 @@ embed-resources: true
 
 ## Theory
 
-- [ ] Review the variance formulation in Freedman - the number of significant variables is not a Bin(50,0.25) (50 = number of variables and 0.20 = alpha level of each test of significance) because each test of a variable's significance is not an *independent* trial!  These tests are dependent. The expected number of significant tests is 50\*.25 = 12.5 but the variance is not 50\*.25\*(1-.25) = 9.375 due to the dependence of the tests. We can show this empirically with the simulations. It would be awesome to figure out the theoretical variance thus we need to know *how* the tests are correlated with each other. 
+- [ ] Review the variance formulation in Freedman - the number of significant variables is not a Bin(50,0.25) (50 = number of variables and 0.20 = alpha level of each test of significance) because each test of a variable's significance is not an *independent* trial!  These tests are dependent. The expected number of significant tests is 50\*.25 = 12.5 but the variance is not 50\*.25\*(1-.25) = 9.375 due to the dependence of the tests. We can show this empirically with the simulations. It would be awesome to figure out the theoretical variance thus we need to know *how* the tests are correlated with each other. X = number of significant covariates under then null (i.e. all noise covars) then EX = n\*p and VarX = ?
 - [x] Understand Flack and Chang paper
 
 ## Development Code
@@ -87,6 +87,15 @@ https://doi.org/10.1214/19-STS733
 ## GLM
 
 ## Survival
+
+### Volinsky, Madigan, Raferty, and Kronmal 
+
+Chris T. Volinsky, David Madigan, Adrian E. Raftery, & Richard A. Kronmal. (1997) Bayesian model averaging in proportional hazard models: Assessing the risk of a stroke. Applied Statistics, 46, No. 4, 433-448. 
+
+Note my long term quote that I used to have up is from this paper: "There are now many references exposing the problems with this general approach.
+Freedman (1983) and Flack and Chang (1987) demonstrated the tendency of step-wise methods to select pure noise variables as signi®cant, especially when there is multicollinearity among the explanatory variables or when the ratio of the number of variables to the number of records is high."
+
+This might be a good read but there aren't any simulations in it (that I see on a cursory glance) and it is outside of what we are really interested in. 
 
 ### Tibshirani
 

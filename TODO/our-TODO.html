@@ -2333,7 +2333,7 @@ window.Quarto = {
 <section id="theory" class="level2">
 <h2 class="anchored" data-anchor-id="theory">Theory</h2>
 <ul class="task-list">
-<li><label><input type="checkbox">Review the variance formulation in Freedman - the number of significant variables is not a Bin(50,0.25) (50 = number of variables and 0.20 = alpha level of each test of significance) because each test of a variable’s significance is not an <em>independent</em> trial! These tests are dependent. The expected number of significant tests is 50*.25 = 12.5 but the variance is not 50*.25*(1-.25) = 9.375 due to the dependence of the tests. We can show this empirically with the simulations. It would be awesome to figure out the theoretical variance thus we need to know <em>how</em> the tests are correlated with each other.</label></li>
+<li><label><input type="checkbox">Review the variance formulation in Freedman - the number of significant variables is not a Bin(50,0.25) (50 = number of variables and 0.20 = alpha level of each test of significance) because each test of a variable’s significance is not an <em>independent</em> trial! These tests are dependent. The expected number of significant tests is 50*.25 = 12.5 but the variance is not 50*.25*(1-.25) = 9.375 due to the dependence of the tests. We can show this empirically with the simulations. It would be awesome to figure out the theoretical variance thus we need to know <em>how</em> the tests are correlated with each other. X = number of significant covariates under then null (i.e. all noise covars) then EX = n*p and VarX = ?</label></li>
 <li><label><input type="checkbox" checked>Understand Flack and Chang paper</label></li>
 </ul>
 </section>
@@ -2423,6 +2423,12 @@ window.Quarto = {
 </section>
 <section id="survival" class="level2">
 <h2 class="anchored" data-anchor-id="survival">Survival</h2>
+<section id="volinsky-madigan-raferty-and-kronmal" class="level3">
+<h3 class="anchored" data-anchor-id="volinsky-madigan-raferty-and-kronmal">Volinsky, Madigan, Raferty, and Kronmal</h3>
+<p>Chris T. Volinsky, David Madigan, Adrian E. Raftery, &amp; Richard A. Kronmal. (1997) Bayesian model averaging in proportional hazard models: Assessing the risk of a stroke. Applied Statistics, 46, No. 4, 433-448.</p>
+<p>Note my long term quote that I used to have up is from this paper: “There are now many references exposing the problems with this general approach. Freedman (1983) and Flack and Chang (1987) demonstrated the tendency of step-wise methods to select pure noise variables as signi®cant, especially when there is multicollinearity among the explanatory variables or when the ratio of the number of variables to the number of records is high.”</p>
+<p>This might be a good read but there aren’t any simulations in it (that I see on a cursory glance) and it is outside of what we are really interested in.</p>
+</section>
 <section id="tibshirani-1" class="level3">
 <h3 class="anchored" data-anchor-id="tibshirani-1">Tibshirani</h3>
 <p>Tibshirani R. The lasso method for variable selection in the Cox model. Stat Med. 1997 Feb 28;16(4):385-95. doi: 10.1002/(sici)1097-0258(19970228)16:4&lt;385::aid-sim380&gt;3.0.co;2-3. PMID: 9044528.</p>
