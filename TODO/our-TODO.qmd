@@ -113,6 +113,16 @@ Crowther MJ, Lambert PC. Simulating biologically plausible complex survival data
 
 ## Polynomial RV Generation
 
+## Testing Normality
+
+### Shapiro & Wilk
+
+Shapiro SS and Wilk MB. An analysis of variance test for normality (complete samples).  Biometrika. 1965;52(3/4):591-611. 
+
+### Razali & Wah
+
+Razali NM and Wah YB. Power comparisons of Shapiro-Wilk, Kolmogorov-Smirnov, Lilliefors and Anderson-Darling tests. Journal of Statistical Modeling and Analytics. 2011;2(1):21-33.
+
 ## Other methods?
 
 # Brainstorming/Spitballing
