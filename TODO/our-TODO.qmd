@@ -4,6 +4,11 @@ format: html
 embed-resources: true
 ---
 
+# Project Title Ideas
+
+- The Simulation Project (overall possible title - there may be subprojects with subtitles)
+
+
 # General Goals
 
 ## Theory
@@ -39,15 +44,20 @@ Lists of current R packages with relevant simulation capabilities.
 
 Morris TP, White IR, Crowther MJ. Using simulation studies to evaluate statistical methods. Stat Med. 2019 May 20;38(11):2074-2102. doi: 10.1002/sim.8086. Epub 2019 Jan 16. PMID: 30652356; PMCID: PMC6492164.
 
+- Need to spec out their framework and see if that can be generalized to other simulation designs:  ADEMP = Aims, Data generating mechansims, Estimands, Methods, Performance measures
+  
+- What simulation output is typically reported? 
+
 ## Multiple Linear Regression 
 
-Focusing mostly on variable selection techniques. 
+Focusing mostly on variable selection techniques. Could slot in other theory to investigate, if anyone is interested.
 
 ### Freedman
 
 Freedman, D. A. (1983), "A Note on Screening Regression Equations", *The American Statistician*, 37, 152-155.
 
 - Some framing around (1) the expected number of significant variables in the first model to be 12.5 (= $n\times p = 50 \times 0.25$) but that this is *not* a Bin(50,25) because each test is not *independent* and (2) the data as generated do to exactly follow Freedman's theory as the X's are not orthogonal (as is assumed - check this - in the paper's derivations)
+- What about the degree of spurious correlation between Y and X's?  Anyway to decorrelate these? Such as a PCA on the [y x1 .... x50] matrix?  Is that even reasonable?
 
 ### Flack & Chang
 
@@ -74,7 +84,15 @@ Robert Tibshirani, Regression Shrinkage and Selection Via the Lasso, Journal of 
 Trevor Hastie, Robert Tibshirani, Ryan Tibshirani. "Best Subset, Forward Stepwise or Lasso? Analysis and Recommendations Based on Extensive Comparisons." Statistical Science, 35(4) 579-592 November 2020.
 https://doi.org/10.1214/19-STS733
 
+## GLM
+
+Perhaps some count data simulations just to extend the previous work. 
+
 ## Linear Mixed Models 
+
+Simulating dependence structures, which seems a decent prerequisite for multistate models.
+
+Concepts to consider:  random intercept models, random slope models, more complex structures, hierarchical data generation, covariance specificiation, convergence issues
 
 - Can compare power between different study designs which incorporate information repeated measures structure vs. not and look at the impact of sample size and within vs between individual variation. 
 
@@ -84,18 +102,39 @@ https://doi.org/10.1214/19-STS733
 
   An alternative design would be to have 180 independent individuals and  randomly assign 60 to each session. Here there is no dependency structure and all 180 observations are independent. Whether this design has more or less power than the repeated-measures design depends on the within-subject correlation and variance structure, so power is not determined solely by the nominal sample size. 
 
-## GLM
+###  Baayen, Davidson, & Bates
+
+R.H. Baayen, D.J. Davidson, D.M. Bates, Mixed-effects modeling with crossed random effects for subjects and items, Journal of Memory and Language, Volume 59, Issue 4, 2008, Pages 390-412, ISSN 0749-596X,
+https://doi.org/10.1016/j.jml.2007.12.005. (https://www.sciencedirect.com/science/article/pii/S0749596X07001398)
+
+### Brown
+
+Brown, V. A. (2021). An introduction to linear mixed-effects modeling in R. Advances in Methods and Practices in Psychological Science, 4(1), Article 2515245920960351. https://doi.org/10.1177/2515245920960351
+
+I don't think this has any simulations but it does give an overview of lmes in R so might be helpful for background.
 
 ## Survival
+
+There are lots of concepts here that seem important:  
+
+  - Time-to-event 
+  - Counting process formulation 
+  - Different modeling approaches? (e.g. Andersen-Gill, Prentice-Williams-Peterson models)
+  - Frailty terms
+  - Proportional vs non-proportional hazards
+  - AFT models
+  - Competing risk
+  - Recurrent events
+
+This can get big fast!
 
 ### Volinsky, Madigan, Raferty, and Kronmal 
 
 Chris T. Volinsky, David Madigan, Adrian E. Raftery, & Richard A. Kronmal. (1997) Bayesian model averaging in proportional hazard models: Assessing the risk of a stroke. Applied Statistics, 46, No. 4, 433-448. 
 
-Note my long term quote that I used to have up is from this paper: "There are now many references exposing the problems with this general approach.
-Freedman (1983) and Flack and Chang (1987) demonstrated the tendency of step-wise methods to select pure noise variables as signi®cant, especially when there is multicollinearity among the explanatory variables or when the ratio of the number of variables to the number of records is high."
+Note my long term quote that I used to have up is from this paper: "There are now many references exposing the problems with this general approach. Freedman (1983) and Flack and Chang (1987) demonstrated the tendency of step-wise methods to select pure noise variables as signi®cant, especially when there is multicollinearity among the explanatory variables or when the ratio of the number of variables to the number of records is high."
 
-This might be a good read but there aren't any simulations in it (that I see on a cursory glance) and it is outside of what we are really interested in. 
+This might be a good read but there aren't any simulations in it (that I see on a cursory glance) and it is outside of what we are really interested in. Here mostly to indicate one source of motivation for examining Freedman and Flack and Chang. 
 
 ### Tibshirani
 
@@ -103,7 +142,11 @@ Tibshirani R. The lasso method for variable selection in the Cox model. Stat Med
 
 ### Bender, Augustin, & Blettner
 
-Bender R, Augustin T, Blettner M. Generating survival times to simulate Cox proportional hazards models. Stat Med. 2005 Jun 15;24(11):1713-23. doi: 10.1002/sim.2059. PMID: 15724232.
+Bender R, Augustin T, Blettner M. Generating survival times to simulate Cox proportional hazards models. Stat Med. 2005 Jun 15;24(11):1713-23. doi: 10.1002/sim.2059. PMID: 15724232. https://onlinelibrary.wiley.com/doi/abs/10.1002/sim.2673
+
+### Burton, Altman, Royson, & Holder
+
+Burton, A., Altman, D.G., Royston, P. and Holder, R.L. (2006), The design of simulation studies in medical statistics. Statist. Med., 25: 4279-4292. https://doi.org/10.1002/sim.2673
 
 ### Crowther & Lambert
 
@@ -111,7 +154,23 @@ Crowther MJ, Lambert PC. Simulating biologically plausible complex survival data
 
 ## Multistate Models
 
-## Polynomial RV Generation
+## Distributions
+
+### Headrick
+
+Todd C. Headrick, Fast fifth-order polynomial transforms for generating univariate and multivariate nonnormal distributions, Computational Statistics & Data Analysis, Volume 40, Issue 4, 2002, Pages 685-711, ISSN 0167-9473, https://doi.org/10.1016/S0167-9473(02)00072-5.(https://www.sciencedirect.com/science/article/pii/S0167947302000725)
+
+### Pant, Chakraborty, & El Moudden
+
+Pant MD, Chakraborty A, Moudden IE. Modeling Non-Normal Distributions with Mixed Third-Order Polynomials of Standard Normal and Logistic Variables. Mathematics. 2025; 13(6):1019. https://doi.org/10.3390/math13061019 
+
+### Qu, Liu, & Zhang
+
+Qu, W., Liu, H. & Zhang, Z. A method of generating multivariate non-normal random numbers with desired multivariate skewness and kurtosis. Behav Res 52, 939–946 (2020). https://doi.org/10.3758/s13428-019-01291-5
+
+### Fairchild, Yin, Baraldi, Astivia, & Shi
+
+Fairchild, A.J., Yin, Y., Baraldi, A.N. et al. Many nonnormalities, one simulation: Do different data generation algorithms affect study results?. Behav Res 56, 6464–6484 (2024). https://doi.org/10.3758/s13428-024-02364-w
 
 ## Testing Normality
 
@@ -133,4 +192,10 @@ A place to add ideas for future pursuits, things we should be focusing on, etc.
 - For implementing R classes, what is the "default" output we want returned when a simulation function is run without saving in a variable? For example, the `lm()` function returns the "Call" and the coefficient estimates from the fitted model.  We could return something around time it took to run the given simulation along with some "Call" type of information. 
 - Should we have a simulation approach from the point of view of the "study design" vs. "method applied"?  E.g. generate different study designs:  iid, experimental, cohort, cross-over, longitudinal,... (would have to look up some standard design styles)
 - Long term:  What about involving others?!  In particular, students could contribute around a specific paper as a capstone project. This might be a way to really grow what is covered in the package - new simulations/methods/study designs can be added by different contributors.
+- Other projects? Not necessarily sims but maybe can be rehashed to include them (maybe)
+
+  - LBP Markov Analysis Paper: revisit goals of this. This was the basis of your 2024 (?!) SDSS presentation and paper.  Has this been updated?
+  - I have a risk calculator paper draft for CTS (carpal tunnel syndrome). Maybe revisit this?
+  - 
+
 
