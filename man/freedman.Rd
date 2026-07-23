@@ -1,19 +1,28 @@
 \name{freedman}
 \alias{freedman}
-\title{feedman simulation function}
+\title{freedman simulation function}
 \usage{
-function(input1, input2 = TRUE)
+freedman(n_trials, n = NULL, p = NULL, rho = NULL, orthonormalize = FALSE)
 }
 \description{
-Some description of what the function does.
+
 }
 \arguments{
-  \item{input1}{What the input does.}
-  \item{input2}{Boolean argument for input.}
+  \item{n_trials}{The number of simulation trials to perform}
+  \item{n}{The size of the dataset (number of rows)}
+  \item{p}{The number of predictor variables to include (X columns)}
+  \item{rho}{The value of the correlation coefficient to use (tied to \code{n} and \code{p} such that \code{rho} = \code{p}/\code{n})}
+  \item{orthonormalize}{Binary argument whether to orthonormalize the predictor matrix}
 }
 \examples{
-# example of how the function is used.
-use <- function(input1 = x, input2 = FALSE)
+# simple case with defaults
+base <- freedman(n_trials = 10)
+# simple with orthonormalize
+ortho <- freedman(n_trials = 10, orthonormalize = TRUE)
+# changing n/p/rho
+change_n <- freedman(n_trials = 10, n = 50)
+change_n_p <- freedman(n_trials = 10, n = 50, p = 20)
+change_n_rho <- freedman(n_trials = 10, n = 50, rho = 0.75)
 
 }
 \value{the output of the function}
