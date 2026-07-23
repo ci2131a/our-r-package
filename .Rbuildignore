@@ -7,3 +7,4 @@
 ^\.git$
 ^LICENSE\.md$
 ^TODO$
+^app$

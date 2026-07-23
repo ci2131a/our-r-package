@@ -8,6 +8,8 @@ Description: Add a brief package description (1 line)
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
+Imports:
+    MASS
 Suggests: 
     knitr,
     rmarkdown,
