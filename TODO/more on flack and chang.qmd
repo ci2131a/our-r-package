@@ -1,0 +1,449 @@
+---
+title: "Derivation of the Population Model in Flack & Chang (1987)"
+author: "Working Notes"
+format: html
+embed-resources: true
+---
+
+# Derivation of the Population Covariance Structure
+
+## Introduction
+
+These notes derive the population regression
+model described in Flack & Chang (1987). Beginning with the multivariate normal model and the published population regression coefficients, we derive the implied Toeplitz correlation structure without assuming an AR(1) covariance model a priori.
+
+$$
+E(Y\mid X)=\beta^TX
+$$
+
+and determine the Toeplitz correlation structure that is implied by the
+published regression coefficients.
+
+Throughout these notes, no specific covariance structure is assumed initially.
+Instead, the covariance structure will be derived from the regression equation.
+
+---
+
+## Notation
+
+Let
+
+$$
+(Y,X_1,\ldots,X_p)^T
+\sim
+N_{p+1}(0,\Sigma),
+$$
+
+where
+
+$$
+\Sigma=
+\begin{pmatrix}
+1 & c^T\\
+c & R
+\end{pmatrix},
+$$
+
+with
+
+$$
+c=
+\left(
+\frac12,
+\frac12,
+0,
+\ldots,
+0
+\right)^T.
+$$
+
+The predictor correlation matrix is assumed to be Toeplitz,
+
+$$
+R=(r_{|i-j|}),
+$$
+
+where
+
+$$
+r_k=\operatorname{Corr}(X_i,X_{i+k}),
+\qquad
+k=0,1,\ldots,
+$$
+
+and
+
+$$
+r_0=1.
+$$
+
+The vector of population regression coefficients is
+
+$$
+\beta
+=
+R^{-1}c.
+$$
+
+Equivalently,
+
+$$
+R\beta=c.
+$$
+
+Suppose
+
+$$
+\beta
+=
+(b_1,b_2,b_3,0,\ldots,0)^T.
+$$
+
+---
+
+# Recovering the Toeplitz Correlations
+
+The first three rows of
+
+$$
+R\beta=c
+$$
+
+are
+
+$$
+b_1+r_1b_2+r_2b_3=\frac12,
+$$
+
+$$
+r_1b_1+b_2+r_1b_3=\frac12,
+$$
+
+and
+
+$$
+r_2b_1+r_1b_2+b_3=0.
+$$
+
+---
+
+## Determining the first lag
+
+The second equation immediately gives
+
+$$
+r_1(b_1+b_3)
+=
+\frac12-b_2,
+$$
+
+or
+
+$$
+\boxed{
+r_1
+=
+\frac{\frac12-b_2}
+     {b_1+b_3}.
+}
+$$
+
+Thus, the first lag of the Toeplitz correlation sequence is completely
+determined by the regression coefficients.
+
+---
+
+## Determining the second lag
+
+Using the third equation,
+
+$$
+r_2b_1
+=
+-r_1b_2-b_3,
+$$
+
+which yields
+
+$$
+\boxed{
+r_2
+=
+-\frac{r_1b_2+b_3}
+       {b_1}.
+}
+$$
+
+Thus the first two lags are completely determined by the regression
+coefficients.
+
+---
+
+# Specialization to the Published Regression Coefficients
+
+The paper reports
+
+$$
+b_1
+=
+\frac{1-\rho}
+     {2(1-\rho^2)},
+$$
+
+$$
+b_2
+=
+\frac{1-\rho+\rho^2}
+     {2(1-\rho^2)},
+$$
+
+and
+
+$$
+b_3
+=
+-\frac{\rho}
+      {2(1-\rho^2)}.
+$$
+
+Substituting into the expression for $r_1$,
+
+$$
+r_1
+=
+\frac{
+\frac12-b_2
+}
+{
+b_1+b_3
+}
+=
+\rho.
+$$
+
+Similarly,
+
+$$
+r_2
+=
+-\frac{r_1b_2+b_3}
+       {b_1}
+=
+\rho^2.
+$$
+
+Hence the published regression coefficients imply
+
+$$
+r_1=\rho,
+\qquad
+r_2=\rho^2.
+$$
+
+---
+
+# A Recurrence Relation for the Toeplitz Sequence
+
+Since
+
+$$
+\beta_4=\beta_5=\cdots=0,
+$$
+
+every row after the third has right-hand side equal to zero.
+
+Consequently,
+
+$$
+b_1r_{m+2}
++
+b_2r_{m+1}
++
+b_3r_m
+=
+0,
+\qquad
+m\ge0.
+$$
+
+Substituting the published regression coefficients gives
+
+$$
+(1-\rho)r_{m+2}
++
+(1-\rho+\rho^2)r_{m+1}
+-
+\rho r_m
+=
+0.
+$$
+
+Thus, the Toeplitz correlation sequence satisfies a second-order linear
+recurrence.
+
+---
+
+# Induction Proof
+
+The recurrence has initial conditions
+
+$$
+r_0=1,
+\qquad
+r_1=\rho,
+\qquad
+r_2=\rho^2.
+$$
+
+Assume
+
+$$
+r_m=\rho^m,
+$$
+
+and
+
+$$
+r_{m+1}=\rho^{m+1}.
+$$
+
+Then
+
+$$
+\begin{aligned}
+r_{m+2}
+&=
+\frac{
+\rho r_m
+-
+(1-\rho+\rho^2)r_{m+1}
+}
+{1-\rho} \\
+&=
+\frac{
+\rho^{m+1}
+-
+(1-\rho+\rho^2)\rho^{m+1}
+}
+{1-\rho} \\
+&=
+\rho^{m+1}
+\frac{
+1-(1-\rho+\rho^2)
+}
+{1-\rho} \\
+&=
+\rho^{m+1}
+\frac{
+\rho-\rho^2
+}
+{1-\rho} \\
+&=
+\rho^{m+2}.
+\end{aligned}
+$$
+
+Therefore,
+
+$$
+r_m=\rho^m,
+\qquad
+m=0,1,2,\ldots.
+$$
+
+Hence
+
+$$
+\boxed{
+R_{ij}
+=
+\rho^{|i-j|}.
+}
+$$
+
+---
+
+# Theorem
+
+::: {.theorem}
+
+Let
+
+$$
+R=(r_{|i-j|})
+$$
+
+be a positive-definite Toeplitz correlation matrix and let
+
+$$
+c=
+\left(
+\frac12,
+\frac12,
+0,
+\ldots,
+0
+\right)^T.
+$$
+
+Suppose the population regression coefficients are given by
+
+$$
+R^{-1}c
+=
+(b_1,b_2,b_3,0,\ldots,0)^T,
+$$
+
+where
+
+$$
+b_1=
+\frac{1-\rho}{2(1-\rho^2)},
+\qquad
+b_2=
+\frac{1-\rho+\rho^2}{2(1-\rho^2)},
+\qquad
+b_3=
+-\frac{\rho}{2(1-\rho^2)}.
+$$
+
+Then the Toeplitz correlation sequence is uniquely
+
+$$
+r_k=\rho^k,
+\qquad
+k=0,1,\ldots,
+$$
+
+and therefore
+
+$$
+R_{ij}=\rho^{|i-j|}.
+$$
+
+:::
+
+---
+
+# Summary
+
+Starting only from
+
+1. a positive-definite Toeplitz correlation matrix,
+2. the population regression equation,
+3. the published population regression coefficients,
+
+we have shown that the Toeplitz correlation sequence must satisfy
+
+$$
+r_k=\rho^k,
+$$
+
+and consequently
+
+$$
+R_{ij}=\rho^{|i-j|}.
+$$
+
+Thus, the familiar AR(1) correlation structure is not introduced as an
+assumption but instead emerges naturally from the published regression model.

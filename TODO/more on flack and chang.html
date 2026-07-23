@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Working Notes">
 
-<title>our TODO</title>
+<title>Derivation of the Population Model in Flack &amp; Chang (1987)</title>
 <style>
 
 code{white-space: pre-wrap;}
@@ -2311,13 +2312,19 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">our TODO</h1>
+<h1 class="title">Derivation of the Population Model in Flack &amp; Chang (1987)</h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Working Notes </p>
+          </div>
+  </div>
     
   
     
@@ -2328,346 +2335,354 @@ window.Quarto = {
 </header>
 
 
-<section id="project-title-ideas" class="level1">
-<h1>Project Title Ideas</h1>
-<ul>
-<li>The Simulation Project (overall possible title - there may be subprojects with subtitles)</li>
-</ul>
-</section>
-<section id="general-goals" class="level1">
-<h1>General Goals</h1>
-<section id="theory" class="level2">
-<h2 class="anchored" data-anchor-id="theory">Theory</h2>
-<ul class="task-list">
-<li><label><input type="checkbox">Review the variance formulation in Freedman - the number of significant variables is not a Bin(50,0.25) (50 = number of variables and 0.20 = alpha level of each test of significance) because each test of a variable’s significance is not an <em>independent</em> trial! These tests are dependent. The expected number of significant tests is 50*.25 = 12.5 but the variance is not 50*.25*(1-.25) = 9.375 due to the dependence of the tests. We can show this empirically with the simulations. It would be awesome to figure out the theoretical variance thus we need to know <em>how</em> the tests are correlated with each other. X = number of significant covariates under then null (i.e. all noise covars) then EX = n*p and VarX = ?</label></li>
-<li><label><input type="checkbox" checked>Understand Flack and Chang paper</label></li>
-</ul>
-</section>
-<section id="development-code" class="level2">
-<h2 class="anchored" data-anchor-id="development-code">Development Code</h2>
-<ul class="task-list">
-<li><label><input type="checkbox" checked>Develop a function for Freedman simulation</label></li>
-<li><label><input type="checkbox" checked>Start code for Flack &amp; Chang simulation</label></li>
-<li><label><input type="checkbox">Update code of Flack &amp; Chang simulation to implement the model selection methods (one based on Rsquared and one based on stepwise with p-values)</label></li>
-<li><label><input type="checkbox">Learn and implement R classes so our simulation functions produce similar output when called by summary or plot</label></li>
-</ul>
-</section>
-<section id="documentation" class="level2">
-<h2 class="anchored" data-anchor-id="documentation">Documentation</h2>
-<ul class="task-list">
-<li><label><input type="checkbox">Document the current state of Freedman function</label></li>
-</ul>
-</section>
-<section id="testing" class="level2">
-<h2 class="anchored" data-anchor-id="testing">Testing</h2>
-<ul class="task-list">
-<li><label><input type="checkbox">Write some tests for checking the Freedman function</label></li>
-</ul>
-</section>
-</section>
-<section id="current-r-packages-with-sims" class="level1">
-<h1>Current R packages with Sims</h1>
-<p>Lists of current R packages with relevant simulation capabilities.</p>
-<ul>
-<li><a href="https://cran.r-project.org/web/packages/survsim/index.html">survsim</a>: simple and complex survival data including recurrent and multiple events AND competing risks.</li>
-</ul>
-</section>
-<section id="potential-papers-and-the-things-to-do-forthoughts-on-each-paper" class="level1">
-<h1>Potential Papers and the Things To Do for/Thoughts on each Paper</h1>
-<section id="general-simulation-study-designtheory" class="level2">
-<h2 class="anchored" data-anchor-id="general-simulation-study-designtheory">General Simulation Study Design/Theory</h2>
-<section id="morris-white-crowther" class="level3">
-<h3 class="anchored" data-anchor-id="morris-white-crowther">Morris, White, &amp; Crowther</h3>
-<p>Morris TP, White IR, Crowther MJ. Using simulation studies to evaluate statistical methods. Stat Med. 2019 May 20;38(11):2074-2102. doi: 10.1002/sim.8086. Epub 2019 Jan 16. PMID: 30652356; PMCID: PMC6492164.</p>
-<ul>
-<li><p>Need to spec out their framework and see if that can be generalized to other simulation designs: ADEMP = Aims, Data generating mechansims, Estimands, Methods, Performance measures</p></li>
-<li><p>What simulation output is typically reported?</p></li>
-</ul>
-</section>
-</section>
-<section id="multiple-linear-regression" class="level2">
-<h2 class="anchored" data-anchor-id="multiple-linear-regression">Multiple Linear Regression</h2>
-<p>Focusing mostly on variable selection techniques. Could slot in other theory to investigate, if anyone is interested.</p>
-<section id="freedman" class="level3">
-<h3 class="anchored" data-anchor-id="freedman">Freedman</h3>
-<p>Freedman, D. A. (1983), “A Note on Screening Regression Equations”, <em>The American Statistician</em>, 37, 152-155.</p>
-<ul>
-<li>Some framing around (1) the expected number of significant variables in the first model to be 12.5 (= <span class="math inline">\(n\times p = 50 \times 0.25\)</span>) but that this is <em>not</em> a Bin(50,25) because each test is not <em>independent</em> and (2) the data as generated do to exactly follow Freedman’s theory as the X’s are not orthogonal (as is assumed - check this - in the paper’s derivations)</li>
-<li>What about the degree of spurious correlation between Y and X’s? Anyway to decorrelate these? Such as a PCA on the [y x1 …. x50] matrix? Is that even reasonable?</li>
-</ul>
-</section>
-<section id="flack-chang" class="level3">
-<h3 class="anchored" data-anchor-id="flack-chang">Flack &amp; Chang</h3>
-<p>Flack, V. F., &amp; Chang, P. C. (1987). Frequency of Selecting Noise Variables in Subset Regression Analysis: A Simulation Study. The American Statistician, 41(1), 84–86. https://doi.org/10.1080/00031305.1987.10475450</p>
-<ul>
-<li><p>Note that the autocorrelation pattern of the P candidate variables with the stated choice of subscripts would not give a true regression equation as stated. Their <span class="math inline">\(\rho_{ij} = \rho^{j-i+1}\)</span> for <span class="math inline">\(j &gt; i = 1, \cdots, p-1\)</span>, but it appears they should have <span class="math inline">\(\rho_{ij} = \rho^{j-i}\)</span> for <span class="math inline">\(j &gt; i = 1, \cdots, p\)</span>… <span class="math inline">\(\rho^{|j-i|}\)</span> can be used for <span class="math inline">\(j \neq i \in 1:p\)</span> which gives an AR(1) correlation matrix which would give their true regression equation and Table 1 <span class="math inline">\(\beta\)</span> coefficients. With their stated <span class="math inline">\(\rho_{ij}\)</span> the true regression equation will be different… we can use simulations to show this! (But also get the true regression equations analytically… details forthcoming!)</p></li>
-<li><p>OK, here are some details for filling in the paper:</p></li>
-</ul>
-<p>The paper assumes that <span class="math inline">\(Y\)</span> and <span class="math inline">\(X_1,\cdots,X_p\)</span> are MVN:</p>
+<section id="derivation-of-the-population-covariance-structure" class="level1">
+<h1>Derivation of the Population Covariance Structure</h1>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>These notes derive the population regression model described in Flack &amp; Chang (1987). Beginning with the multivariate normal model and the published population regression coefficients, we derive the implied Toeplitz correlation structure without assuming an AR(1) covariance model a priori.</p>
 <p><span class="math display">\[
-(Y,X_1,\ldots,X_p)^T \sim N_{p+1}(0,\Sigma),
+E(Y\mid X)=\beta^TX
 \]</span></p>
-<p>with all variables standardized so that every variance is 1.</p>
-<p>The covariance matrix in block form is:</p>
+<p>and determine the Toeplitz correlation structure that is implied by the published regression coefficients.</p>
+<p>Throughout these notes, no specific covariance structure is assumed initially. Instead, the covariance structure will be derived from the regression equation.</p>
+<hr>
+</section>
+<section id="notation" class="level2">
+<h2 class="anchored" data-anchor-id="notation">Notation</h2>
+<p>Let</p>
+<p><span class="math display">\[
+(Y,X_1,\ldots,X_p)^T
+\sim
+N_{p+1}(0,\Sigma),
+\]</span></p>
+<p>where</p>
 <p><span class="math display">\[
 \Sigma=
 \begin{pmatrix}
-1 &amp; \Sigma_{YX} \\
-\Sigma_{XY} &amp; \Sigma_{XX}
-\end{pmatrix},
-\]</span> where</p>
-<p><span class="math display">\[
-\Sigma_{YX} =
-\begin{pmatrix}
-0.5 &amp; 0.5 &amp; 0 &amp; 0 &amp; \cdots &amp; 0
-\end{pmatrix}.
-\]</span> The covariance matrix of the predictors:</p>
-<p><span class="math inline">\(\rho_{ij}=\rho^{j-i}
-\qquad (j&gt;i).\)</span></p>
-<p>Since <span class="math inline">\(\Sigma\)</span> is symmetric,</p>
-<p><span class="math display">\[
-\Sigma_{XX} =
-\begin{pmatrix}
-1      &amp; \rho    &amp; \rho^2 &amp; \rho^3 &amp; \cdots &amp; \rho^{p-1} \\
-\rho   &amp; 1       &amp; \rho   &amp; \rho^2 &amp; \cdots &amp; \rho^{p-2} \\
-\rho^2 &amp; \rho    &amp; 1      &amp; \rho   &amp; \cdots &amp; \rho^{p-3} \\
-\rho^3 &amp; \rho^2  &amp; \rho   &amp; 1      &amp; \cdots &amp; \vdots \\
-\vdots &amp; \vdots  &amp; \vdots &amp; \vdots &amp; \ddots \\
-\rho^{p-1} &amp; \rho^{p-2} &amp; \rho^{p-3} &amp; \rho^{p-4} &amp; \cdots &amp; 1
+1 &amp; c^T\\
+c &amp; R
 \end{pmatrix},
 \]</span></p>
-<p>or compactly,</p>
-<p><span class="math display">\[
-(\Sigma_{XX})_{ij}=\rho^{|i-j|}.
-\]</span></p>
-<p>This is the familiar AR(1) correlation matrix.</p>
-<p>Therefore, the full covariance matrix is,</p>
-<p><span class="math display">\[
-\Sigma =
-\begin{pmatrix}
-1 &amp; .5 &amp; .5 &amp; 0 &amp; 0 &amp; \cdots &amp; 0 \\
-.5 &amp; 1 &amp; \rho    &amp; \rho^2 &amp; \rho^3 &amp; \cdots &amp; \rho^{p-1} \\
-.5 &amp; \rho   &amp; 1       &amp; \rho   &amp; \rho^2 &amp; \cdots &amp; \rho^{p-2} \\
-0 &amp; \rho^2 &amp; \rho    &amp; 1      &amp; \rho &amp; \cdots &amp; \rho^{p-3} \\
-0 &amp; \rho^3 &amp; \rho^2  &amp; \rho &amp; 1 &amp; \cdots &amp; \vdots \\
-\vdots &amp; \vdots &amp; \vdots  &amp; \vdots &amp; \vdots &amp; \ddots \\
-0 &amp; \rho^{p-1} &amp; \rho^{p-2} &amp; \rho^{p-3} &amp; \rho^{p-4} &amp; \cdots &amp; 1
-\end{pmatrix},
-\]</span></p>
-<p>Because the joint distribution is multivariate normal,</p>
-<p><span class="math display">\[
-E(Y\mid X) =
-\Sigma_{YX}\Sigma_{XX}^{-1}X.
-\]</span></p>
-<p>Thus the population coefficient vector is</p>
-<p><span class="math display">\[
-\beta =
-\Sigma_{XX}^{-1}
-\begin{pmatrix}
-0.5 \\
-0.5 \\
-0 \\
-\vdots \\
-0
-\end{pmatrix}.
-\]</span></p>
-<p>The key fact is that the inverse of the AR(1) correlation matrix is tridiagonal:</p>
-<p><span class="math display">\[
-\Sigma_{XX}^{-1} =
-\frac1{1-\rho^2}
-\begin{pmatrix}
-1 &amp; -\rho &amp; 0 &amp; 0 &amp; \cdots \\
--\rho &amp; 1+\rho^2 &amp; -\rho &amp; 0 &amp; \cdots \\
-0 &amp; -\rho &amp; 1+\rho^2 &amp; -\rho &amp; \cdots \\
-\vdots &amp;&amp;&amp; \ddots
-\end{pmatrix}.
-\]</span></p>
-<p>Multiplying by</p>
+<p>with</p>
 <p><span class="math display">\[
 c=
-\begin{pmatrix}
-0.5 \\
-0.5 \\
-0 \\
-\vdots
-\end{pmatrix}
+\left(
+\frac12,
+\frac12,
+0,
+\ldots,
+0
+\right)^T.
 \]</span></p>
-<p>gives</p>
+<p>The predictor correlation matrix is assumed to be Toeplitz,</p>
 <p><span class="math display">\[
-\beta_1 = \frac{0.5-\rho(0.5)}{1-\rho^2} = \frac{1-\rho}{2(1-\rho^2)},
+R=(r_{|i-j|}),
 \]</span></p>
+<p>where</p>
 <p><span class="math display">\[
-\beta_2 = \frac{-\rho(0.5)+(1+\rho^2)(0.5)}{1-\rho^2}
-= \frac{1-\rho+\rho^2}{2(1-\rho^2)},
-\]</span></p>
-<p><span class="math display">\[
-\beta_3 = \frac{-\rho(0.5)}{1-\rho^2} = -\frac{\rho}{2(1-\rho^2)},
+r_k=\operatorname{Corr}(X_i,X_{i+k}),
+\qquad
+k=0,1,\ldots,
 \]</span></p>
 <p>and</p>
 <p><span class="math display">\[
-\beta_j=0,
-\qquad j\ge4.
+r_0=1.
+\]</span></p>
+<p>The vector of population regression coefficients is</p>
+<p><span class="math display">\[
+\beta
+=
+R^{-1}c.
+\]</span></p>
+<p>Equivalently,</p>
+<p><span class="math display">\[
+R\beta=c.
+\]</span></p>
+<p>Suppose</p>
+<p><span class="math display">\[
+\beta
+=
+(b_1,b_2,b_3,0,\ldots,0)^T.
+\]</span></p>
+<hr>
+</section>
+</section>
+<section id="recovering-the-toeplitz-correlations" class="level1">
+<h1>Recovering the Toeplitz Correlations</h1>
+<p>The first three rows of</p>
+<p><span class="math display">\[
+R\beta=c
+\]</span></p>
+<p>are</p>
+<p><span class="math display">\[
+b_1+r_1b_2+r_2b_3=\frac12,
+\]</span></p>
+<p><span class="math display">\[
+r_1b_1+b_2+r_1b_3=\frac12,
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+r_2b_1+r_1b_2+b_3=0.
+\]</span></p>
+<hr>
+<section id="determining-the-first-lag" class="level2">
+<h2 class="anchored" data-anchor-id="determining-the-first-lag">Determining the first lag</h2>
+<p>The second equation immediately gives</p>
+<p><span class="math display">\[
+r_1(b_1+b_3)
+=
+\frac12-b_2,
+\]</span></p>
+<p>or</p>
+<p><span class="math display">\[
+\boxed{
+r_1
+=
+\frac{\frac12-b_2}
+     {b_1+b_3}.
+}
+\]</span></p>
+<p>Thus, the first lag of the Toeplitz correlation sequence is completely determined by the regression coefficients.</p>
+<hr>
+</section>
+<section id="determining-the-second-lag" class="level2">
+<h2 class="anchored" data-anchor-id="determining-the-second-lag">Determining the second lag</h2>
+<p>Using the third equation,</p>
+<p><span class="math display">\[
+r_2b_1
+=
+-r_1b_2-b_3,
+\]</span></p>
+<p>which yields</p>
+<p><span class="math display">\[
+\boxed{
+r_2
+=
+-\frac{r_1b_2+b_3}
+       {b_1}.
+}
+\]</span></p>
+<p>Thus the first two lags are completely determined by the regression coefficients.</p>
+<hr>
+</section>
+</section>
+<section id="specialization-to-the-published-regression-coefficients" class="level1">
+<h1>Specialization to the Published Regression Coefficients</h1>
+<p>The paper reports</p>
+<p><span class="math display">\[
+b_1
+=
+\frac{1-\rho}
+     {2(1-\rho^2)},
+\]</span></p>
+<p><span class="math display">\[
+b_2
+=
+\frac{1-\rho+\rho^2}
+     {2(1-\rho^2)},
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+b_3
+=
+-\frac{\rho}
+      {2(1-\rho^2)}.
+\]</span></p>
+<p>Substituting into the expression for <span class="math inline">\(r_1\)</span>,</p>
+<p><span class="math display">\[
+r_1
+=
+\frac{
+\frac12-b_2
+}
+{
+b_1+b_3
+}
+=
+\rho.
+\]</span></p>
+<p>Similarly,</p>
+<p><span class="math display">\[
+r_2
+=
+-\frac{r_1b_2+b_3}
+       {b_1}
+=
+\rho^2.
+\]</span></p>
+<p>Hence the published regression coefficients imply</p>
+<p><span class="math display">\[
+r_1=\rho,
+\qquad
+r_2=\rho^2.
+\]</span></p>
+<hr>
+</section>
+<section id="a-recurrence-relation-for-the-toeplitz-sequence" class="level1">
+<h1>A Recurrence Relation for the Toeplitz Sequence</h1>
+<p>Since</p>
+<p><span class="math display">\[
+\beta_4=\beta_5=\cdots=0,
+\]</span></p>
+<p>every row after the third has right-hand side equal to zero.</p>
+<p>Consequently,</p>
+<p><span class="math display">\[
+b_1r_{m+2}
++
+b_2r_{m+1}
++
+b_3r_m
+=
+0,
+\qquad
+m\ge0.
+\]</span></p>
+<p>Substituting the published regression coefficients gives</p>
+<p><span class="math display">\[
+(1-\rho)r_{m+2}
++
+(1-\rho+\rho^2)r_{m+1}
+-
+\rho r_m
+=
+0.
+\]</span></p>
+<p>Thus, the Toeplitz correlation sequence satisfies a second-order linear recurrence.</p>
+<hr>
+</section>
+<section id="induction-proof" class="level1">
+<h1>Induction Proof</h1>
+<p>The recurrence has initial conditions</p>
+<p><span class="math display">\[
+r_0=1,
+\qquad
+r_1=\rho,
+\qquad
+r_2=\rho^2.
+\]</span></p>
+<p>Assume</p>
+<p><span class="math display">\[
+r_m=\rho^m,
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+r_{m+1}=\rho^{m+1}.
+\]</span></p>
+<p>Then</p>
+<p><span class="math display">\[
+\begin{aligned}
+r_{m+2}
+&amp;=
+\frac{
+\rho r_m
+-
+(1-\rho+\rho^2)r_{m+1}
+}
+{1-\rho} \\
+&amp;=
+\frac{
+\rho^{m+1}
+-
+(1-\rho+\rho^2)\rho^{m+1}
+}
+{1-\rho} \\
+&amp;=
+\rho^{m+1}
+\frac{
+1-(1-\rho+\rho^2)
+}
+{1-\rho} \\
+&amp;=
+\rho^{m+1}
+\frac{
+\rho-\rho^2
+}
+{1-\rho} \\
+&amp;=
+\rho^{m+2}.
+\end{aligned}
+\]</span></p>
+<p>Therefore,</p>
+<p><span class="math display">\[
+r_m=\rho^m,
+\qquad
+m=0,1,2,\ldots.
 \]</span></p>
 <p>Hence</p>
 <p><span class="math display">\[
-E(Y\mid X) = \frac{(1-\rho)X_1 + (1-\rho+\rho^2)X_2 - \rho X_3}{2(1-\rho^2)},
+\boxed{
+R_{ij}
+=
+\rho^{|i-j|}.
+}
 \]</span></p>
-<p>as given in the paper.</p>
-<p>For <span class="math inline">\(\rho=0\)</span>,</p>
+<hr>
+</section>
+<section id="theorem" class="level1">
+<h1>Theorem</h1>
+<div class="theorem">
+<p>Let</p>
 <p><span class="math display">\[
-\beta=(0.5, 0.5, 0, \ldots, 0).
+R=(r_{|i-j|})
 \]</span></p>
-<p>For <span class="math inline">\(\rho=0.3\)</span>,</p>
+<p>be a positive-definite Toeplitz correlation matrix and let</p>
 <p><span class="math display">\[
-\beta_1=\frac{0.7}{1.82}=0.3846, \\
-\beta_2=\frac{0.79}{1.82}=0.4341, \\
-\beta_3=-\frac{0.3}{1.82}=-0.1648,
-\]</span> giving approximately <span class="math inline">\((0.38,0.43,-0.16)\)</span> as in the paper.</p>
-<p>For <span class="math inline">\(\rho=0.5\)</span>,</p>
-<p><span class="math display">\[
-\beta_1=\frac{0.5}{1.5}=0.3333, \\
-\beta_2=\frac{0.75}{1.5}=0.5000, \\
-\beta_3=-\frac{0.5}{1.5}=-0.3333,
+c=
+\left(
+\frac12,
+\frac12,
+0,
+\ldots,
+0
+\right)^T.
 \]</span></p>
-<p>which matches the paper (all of the above values are in Table 1 of the paper).</p>
+<p>Suppose the population regression coefficients are given by</p>
 <p><span class="math display">\[
-R^2_{Y\cdot X} =
-0.5000,\quad 0.3725,\quad 0.3125
+R^{-1}c
+=
+(b_1,b_2,b_3,0,\ldots,0)^T,
 \]</span></p>
-<ul>
-<li>Can partially frame this around connections to intro Math/Stat theory (e.g. MVN results).</li>
-</ul>
+<p>where</p>
+<p><span class="math display">\[
+b_1=
+\frac{1-\rho}{2(1-\rho^2)},
+\qquad
+b_2=
+\frac{1-\rho+\rho^2}{2(1-\rho^2)},
+\qquad
+b_3=
+-\frac{\rho}{2(1-\rho^2)}.
+\]</span></p>
+<p>Then the Toeplitz correlation sequence is uniquely</p>
+<p><span class="math display">\[
+r_k=\rho^k,
+\qquad
+k=0,1,\ldots,
+\]</span></p>
+<p>and therefore</p>
+<p><span class="math display">\[
+R_{ij}=\rho^{|i-j|}.
+\]</span></p>
+</div>
+<hr>
 </section>
-<section id="freedman-pee" class="level3">
-<h3 class="anchored" data-anchor-id="freedman-pee">Freedman &amp; Pee</h3>
-<p>Freedman, L. S., &amp; Pee, D. (1989). Return to a Note on Screening Regression Equations. The American Statistician, 43(4), 279–282. https://doi.org/10.1080/00031305.1989.10475675</p>
-</section>
-<section id="derksen-keselman" class="level3">
-<h3 class="anchored" data-anchor-id="derksen-keselman">Derksen &amp; Keselman</h3>
-<p>Derksen, S.A., &amp; Keselman, H.J. (1992). Backward, forward and stepwise automated subset selection algorithms: Frequency of obtaining authentic and noise variables. British Journal of Mathematical and Statistical Psychology, 45, 265-282.</p>
-</section>
-<section id="tibshirani" class="level3">
-<h3 class="anchored" data-anchor-id="tibshirani">Tibshirani</h3>
-<p>Robert Tibshirani, Regression Shrinkage and Selection Via the Lasso, Journal of the Royal Statistical Society: Series B (Methodological), Volume 58, Issue 1, January 1996, Pages 267–288, https://doi.org/10.1111/j.2517-6161.1996.tb02080.x</p>
-</section>
-<section id="hastie-tibshirani-tibshirani" class="level3">
-<h3 class="anchored" data-anchor-id="hastie-tibshirani-tibshirani">Hastie, Tibshirani, &amp; Tibshirani</h3>
-<p>Trevor Hastie, Robert Tibshirani, Ryan Tibshirani. “Best Subset, Forward Stepwise or Lasso? Analysis and Recommendations Based on Extensive Comparisons.” Statistical Science, 35(4) 579-592 November 2020. https://doi.org/10.1214/19-STS733</p>
-</section>
-</section>
-<section id="glm" class="level2">
-<h2 class="anchored" data-anchor-id="glm">GLM</h2>
-<p>Perhaps some count data simulations just to extend the previous work.</p>
-</section>
-<section id="linear-mixed-models" class="level2">
-<h2 class="anchored" data-anchor-id="linear-mixed-models">Linear Mixed Models</h2>
-<p>Simulating dependence structures, which seems a decent prerequisite for multistate models.</p>
-<p>Concepts to consider: random intercept models, random slope models, more complex structures, hierarchical data generation, covariance specificiation, convergence issues</p>
-<ul>
-<li><p>Can compare power between different study designs which incorporate information repeated measures structure vs. not and look at the impact of sample size and within vs between individual variation.</p>
-<p>For example suppose you have 60 individuals and two choices of experimental design: (1) randomly assign 20 each to the three sessions for vs. (2) measure all 60 at every session. In both cases you have n = 60 independent sampling units (participants), but in the 2nd case if you include all 3 sessions with the appropriate dependency structure incorporated in a mixed model the effective sample size should be somewhere between 60 and 180. (What this effective sample size is depends on the within-subject correlation and the specific parameter of interest that is being assessed so it is not straightforward to define or even calculate.)</p>
-<p>So, including all repeated measures across individuals and including a correct dependence structure should give us a larger (effective) sample size which typically increases the precision of our estimates and thus might provide greater power.</p>
-<p>An alternative design would be to have 180 independent individuals and randomly assign 60 to each session. Here there is no dependency structure and all 180 observations are independent. Whether this design has more or less power than the repeated-measures design depends on the within-subject correlation and variance structure, so power is not determined solely by the nominal sample size.</p></li>
-</ul>
-<section id="baayen-davidson-bates" class="level3">
-<h3 class="anchored" data-anchor-id="baayen-davidson-bates">Baayen, Davidson, &amp; Bates</h3>
-<p>R.H. Baayen, D.J. Davidson, D.M. Bates, Mixed-effects modeling with crossed random effects for subjects and items, Journal of Memory and Language, Volume 59, Issue 4, 2008, Pages 390-412, ISSN 0749-596X, https://doi.org/10.1016/j.jml.2007.12.005. (https://www.sciencedirect.com/science/article/pii/S0749596X07001398)</p>
-</section>
-<section id="brown" class="level3">
-<h3 class="anchored" data-anchor-id="brown">Brown</h3>
-<p>Brown, V. A. (2021). An introduction to linear mixed-effects modeling in R. Advances in Methods and Practices in Psychological Science, 4(1), Article 2515245920960351. https://doi.org/10.1177/2515245920960351</p>
-<p>I don’t think this has any simulations but it does give an overview of lmes in R so might be helpful for background.</p>
-</section>
-</section>
-<section id="survival" class="level2">
-<h2 class="anchored" data-anchor-id="survival">Survival</h2>
-<p>There are lots of concepts here that seem important:</p>
-<ul>
-<li>Time-to-event</li>
-<li>Counting process formulation</li>
-<li>Different modeling approaches? (e.g. Andersen-Gill, Prentice-Williams-Peterson models)</li>
-<li>Frailty terms</li>
-<li>Proportional vs non-proportional hazards</li>
-<li>AFT models</li>
-<li>Competing risk</li>
-<li>Recurrent events</li>
-</ul>
-<p>This can get big fast!</p>
-<section id="volinsky-madigan-raferty-and-kronmal" class="level3">
-<h3 class="anchored" data-anchor-id="volinsky-madigan-raferty-and-kronmal">Volinsky, Madigan, Raferty, and Kronmal</h3>
-<p>Chris T. Volinsky, David Madigan, Adrian E. Raftery, &amp; Richard A. Kronmal. (1997) Bayesian model averaging in proportional hazard models: Assessing the risk of a stroke. Applied Statistics, 46, No. 4, 433-448.</p>
-<p>Note my long term quote that I used to have up is from this paper: “There are now many references exposing the problems with this general approach. Freedman (1983) and Flack and Chang (1987) demonstrated the tendency of step-wise methods to select pure noise variables as signi®cant, especially when there is multicollinearity among the explanatory variables or when the ratio of the number of variables to the number of records is high.”</p>
-<p>This might be a good read but there aren’t any simulations in it (that I see on a cursory glance) and it is outside of what we are really interested in. Here mostly to indicate one source of motivation for examining Freedman and Flack and Chang.</p>
-</section>
-<section id="tibshirani-1" class="level3">
-<h3 class="anchored" data-anchor-id="tibshirani-1">Tibshirani</h3>
-<p>Tibshirani R. The lasso method for variable selection in the Cox model. Stat Med. 1997 Feb 28;16(4):385-95. doi: 10.1002/(sici)1097-0258(19970228)16:4&lt;385::aid-sim380&gt;3.0.co;2-3. PMID: 9044528.</p>
-</section>
-<section id="bender-augustin-blettner" class="level3">
-<h3 class="anchored" data-anchor-id="bender-augustin-blettner">Bender, Augustin, &amp; Blettner</h3>
-<p>Bender R, Augustin T, Blettner M. Generating survival times to simulate Cox proportional hazards models. Stat Med. 2005 Jun 15;24(11):1713-23. doi: 10.1002/sim.2059. PMID: 15724232. https://onlinelibrary.wiley.com/doi/abs/10.1002/sim.2673</p>
-</section>
-<section id="burton-altman-royson-holder" class="level3">
-<h3 class="anchored" data-anchor-id="burton-altman-royson-holder">Burton, Altman, Royson, &amp; Holder</h3>
-<p>Burton, A., Altman, D.G., Royston, P. and Holder, R.L. (2006), The design of simulation studies in medical statistics. Statist. Med., 25: 4279-4292. https://doi.org/10.1002/sim.2673</p>
-</section>
-<section id="crowther-lambert" class="level3">
-<h3 class="anchored" data-anchor-id="crowther-lambert">Crowther &amp; Lambert</h3>
-<p>Crowther MJ, Lambert PC. Simulating biologically plausible complex survival data. Stat Med. 2013 Oct 15;32(23):4118-34. doi: 10.1002/sim.5823. Epub 2013 Apr 23. PMID: 23613458.</p>
-</section>
-</section>
-<section id="multistate-models" class="level2">
-<h2 class="anchored" data-anchor-id="multistate-models">Multistate Models</h2>
-</section>
-<section id="distributions" class="level2">
-<h2 class="anchored" data-anchor-id="distributions">Distributions</h2>
-<section id="headrick" class="level3">
-<h3 class="anchored" data-anchor-id="headrick">Headrick</h3>
-<p>Todd C. Headrick, Fast fifth-order polynomial transforms for generating univariate and multivariate nonnormal distributions, Computational Statistics &amp; Data Analysis, Volume 40, Issue 4, 2002, Pages 685-711, ISSN 0167-9473, https://doi.org/10.1016/S0167-9473(02)00072-5.(https://www.sciencedirect.com/science/article/pii/S0167947302000725)</p>
-</section>
-<section id="pant-chakraborty-el-moudden" class="level3">
-<h3 class="anchored" data-anchor-id="pant-chakraborty-el-moudden">Pant, Chakraborty, &amp; El Moudden</h3>
-<p>Pant MD, Chakraborty A, Moudden IE. Modeling Non-Normal Distributions with Mixed Third-Order Polynomials of Standard Normal and Logistic Variables. Mathematics. 2025; 13(6):1019. https://doi.org/10.3390/math13061019</p>
-</section>
-<section id="qu-liu-zhang" class="level3">
-<h3 class="anchored" data-anchor-id="qu-liu-zhang">Qu, Liu, &amp; Zhang</h3>
-<p>Qu, W., Liu, H. &amp; Zhang, Z. A method of generating multivariate non-normal random numbers with desired multivariate skewness and kurtosis. Behav Res 52, 939–946 (2020). https://doi.org/10.3758/s13428-019-01291-5</p>
-</section>
-<section id="fairchild-yin-baraldi-astivia-shi" class="level3">
-<h3 class="anchored" data-anchor-id="fairchild-yin-baraldi-astivia-shi">Fairchild, Yin, Baraldi, Astivia, &amp; Shi</h3>
-<p>Fairchild, A.J., Yin, Y., Baraldi, A.N. et al. Many nonnormalities, one simulation: Do different data generation algorithms affect study results?. Behav Res 56, 6464–6484 (2024). https://doi.org/10.3758/s13428-024-02364-w</p>
-</section>
-</section>
-<section id="testing-normality" class="level2">
-<h2 class="anchored" data-anchor-id="testing-normality">Testing Normality</h2>
-<section id="shapiro-wilk" class="level3">
-<h3 class="anchored" data-anchor-id="shapiro-wilk">Shapiro &amp; Wilk</h3>
-<p>Shapiro SS and Wilk MB. An analysis of variance test for normality (complete samples). Biometrika. 1965;52(3/4):591-611.</p>
-</section>
-<section id="razali-wah" class="level3">
-<h3 class="anchored" data-anchor-id="razali-wah">Razali &amp; Wah</h3>
-<p>Razali NM and Wah YB. Power comparisons of Shapiro-Wilk, Kolmogorov-Smirnov, Lilliefors and Anderson-Darling tests. Journal of Statistical Modeling and Analytics. 2011;2(1):21-33.</p>
-</section>
-</section>
-<section id="other-methods" class="level2">
-<h2 class="anchored" data-anchor-id="other-methods">Other methods?</h2>
-</section>
-</section>
-<section id="brainstormingspitballing" class="level1">
-<h1>Brainstorming/Spitballing</h1>
-<p>A place to add ideas for future pursuits, things we should be focusing on, etc.</p>
-<ul>
-<li><p>What are possible ways to formulate or spin this for publication(s)? As educational tools. As replication of studies.</p></li>
-<li><p>For implementing R classes, what is the “default” output we want returned when a simulation function is run without saving in a variable? For example, the <code>lm()</code> function returns the “Call” and the coefficient estimates from the fitted model. We could return something around time it took to run the given simulation along with some “Call” type of information.</p></li>
-<li><p>Should we have a simulation approach from the point of view of the “study design” vs. “method applied”? E.g. generate different study designs: iid, experimental, cohort, cross-over, longitudinal,… (would have to look up some standard design styles)</p></li>
-<li><p>Long term: What about involving others?! In particular, students could contribute around a specific paper as a capstone project. This might be a way to really grow what is covered in the package - new simulations/methods/study designs can be added by different contributors.</p></li>
-<li><p>Other projects? Not necessarily sims but maybe can be rehashed to include them (maybe)</p>
-<ul>
-<li>LBP Markov Analysis Paper: revisit goals of this. This was the basis of your 2024 (?!) SDSS presentation and paper. Has this been updated?</li>
-<li>I have a risk calculator paper draft for CTS (carpal tunnel syndrome). Maybe revisit this?</li>
-<li></li>
-</ul></li>
-</ul>
+<section id="summary" class="level1">
+<h1>Summary</h1>
+<p>Starting only from</p>
+<ol type="1">
+<li>a positive-definite Toeplitz correlation matrix,</li>
+<li>the population regression equation,</li>
+<li>the published population regression coefficients,</li>
+</ol>
+<p>we have shown that the Toeplitz correlation sequence must satisfy</p>
+<p><span class="math display">\[
+r_k=\rho^k,
+\]</span></p>
+<p>and consequently</p>
+<p><span class="math display">\[
+R_{ij}=\rho^{|i-j|}.
+\]</span></p>
+<p>Thus, the familiar AR(1) correlation structure is not introduced as an assumption but instead emerges naturally from the published regression model.</p>
 </section>
 
 </main>

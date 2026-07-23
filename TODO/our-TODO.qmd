@@ -19,7 +19,8 @@ embed-resources: true
 ## Development Code
 
 - [x] Develop a function for Freedman simulation
-- [ ] Write code for Flack simulation
+- [x] Start code for Flack & Chang simulation
+- [ ] Update code of Flack & Chang simulation to implement the model selection methods (one based on Rsquared and one based on stepwise with p-values)
 - [ ] Learn and implement R classes so our simulation functions produce similar output when called by summary or plot
 
 ## Documentation
@@ -64,6 +65,185 @@ Freedman, D. A. (1983), "A Note on Screening Regression Equations", *The America
 Flack, V. F., & Chang, P. C. (1987). Frequency of Selecting Noise Variables in Subset Regression Analysis: A Simulation Study. The American Statistician, 41(1), 84–86. https://doi.org/10.1080/00031305.1987.10475450
 
 - Note that the autocorrelation pattern of the P candidate variables with the stated choice of subscripts would not give a true regression equation as stated. Their $\rho_{ij} = \rho^{j-i+1}$ for $j > i = 1, \cdots, p-1$, but it appears they should have $\rho_{ij} = \rho^{j-i}$ for $j > i = 1, \cdots, p$...  $\rho^{|j-i|}$ can be used for $j \neq i \in 1:p$ which gives an AR(1) correlation matrix which would give their true regression equation and Table 1 $\beta$ coefficients. With their stated $\rho_{ij}$ the true regression equation will be different... we can use simulations to show this!  (But also get the true regression equations analytically... details forthcoming!) 
+
+- OK, here are some details for filling in the paper: 
+
+The paper assumes that $Y$ and $X_1,\cdots,X_p$ are MVN: 
+
+$$
+(Y,X_1,\ldots,X_p)^T \sim N_{p+1}(0,\Sigma),
+$$
+
+with all variables standardized so that every variance is 1.
+
+The covariance matrix in block form is:
+
+$$
+\Sigma=
+\begin{pmatrix}
+1 & \Sigma_{YX} \\
+\Sigma_{XY} & \Sigma_{XX}
+\end{pmatrix},
+$$
+where
+
+$$
+\Sigma_{YX} = 
+\begin{pmatrix}
+0.5 & 0.5 & 0 & 0 & \cdots & 0
+\end{pmatrix}.
+$$
+The covariance matrix of the predictors:
+
+$\rho_{ij}=\rho^{j-i}
+\qquad (j>i).$
+
+Since $\Sigma$ is symmetric,
+
+$$
+\Sigma_{XX} =
+\begin{pmatrix}
+1      & \rho    & \rho^2 & \rho^3 & \cdots & \rho^{p-1} \\
+\rho   & 1       & \rho   & \rho^2 & \cdots & \rho^{p-2} \\
+\rho^2 & \rho    & 1      & \rho   & \cdots & \rho^{p-3} \\
+\rho^3 & \rho^2  & \rho   & 1      & \cdots & \vdots \\
+\vdots & \vdots  & \vdots & \vdots & \ddots \\
+\rho^{p-1} & \rho^{p-2} & \rho^{p-3} & \rho^{p-4} & \cdots & 1
+\end{pmatrix},
+$$
+
+or compactly,
+
+$$
+(\Sigma_{XX})_{ij}=\rho^{|i-j|}.
+$$
+
+This is the familiar AR(1) correlation matrix.
+
+Therefore, the full covariance matrix is, 
+
+$$
+\Sigma = 
+\begin{pmatrix}
+1 & .5 & .5 & 0 & 0 & \cdots & 0 \\
+.5 & 1 & \rho    & \rho^2 & \rho^3 & \cdots & \rho^{p-1} \\
+.5 & \rho   & 1       & \rho   & \rho^2 & \cdots & \rho^{p-2} \\
+0 & \rho^2 & \rho    & 1      & \rho & \cdots & \rho^{p-3} \\
+0 & \rho^3 & \rho^2  & \rho & 1 & \cdots & \vdots \\
+\vdots & \vdots & \vdots  & \vdots & \vdots & \ddots \\
+0 & \rho^{p-1} & \rho^{p-2} & \rho^{p-3} & \rho^{p-4} & \cdots & 1
+\end{pmatrix},
+$$
+
+
+Because the joint distribution is multivariate normal,
+
+$$
+E(Y\mid X) =
+\Sigma_{YX}\Sigma_{XX}^{-1}X.
+$$
+
+Thus the population coefficient vector is
+
+$$
+\beta = 
+\Sigma_{XX}^{-1} 
+\begin{pmatrix}
+0.5 \\
+0.5 \\
+0 \\
+\vdots \\
+0
+\end{pmatrix}.
+$$
+
+The key fact is that the inverse of the AR(1) correlation matrix is tridiagonal:
+
+$$
+\Sigma_{XX}^{-1} =
+\frac1{1-\rho^2}
+\begin{pmatrix}
+1 & -\rho & 0 & 0 & \cdots \\
+-\rho & 1+\rho^2 & -\rho & 0 & \cdots \\
+0 & -\rho & 1+\rho^2 & -\rho & \cdots \\
+\vdots &&& \ddots
+\end{pmatrix}.
+$$
+
+Multiplying by
+
+$$
+c=
+\begin{pmatrix}
+0.5 \\
+0.5 \\
+0 \\
+\vdots
+\end{pmatrix}
+$$
+
+gives
+
+$$
+\beta_1 = \frac{0.5-\rho(0.5)}{1-\rho^2} = \frac{1-\rho}{2(1-\rho^2)},
+$$
+
+$$
+\beta_2 = \frac{-\rho(0.5)+(1+\rho^2)(0.5)}{1-\rho^2}
+= \frac{1-\rho+\rho^2}{2(1-\rho^2)},
+$$
+
+$$
+\beta_3 = \frac{-\rho(0.5)}{1-\rho^2} = -\frac{\rho}{2(1-\rho^2)},
+$$
+
+and
+
+$$
+\beta_j=0,
+\qquad j\ge4.
+$$
+
+Hence
+
+$$
+E(Y\mid X) = \frac{(1-\rho)X_1 + (1-\rho+\rho^2)X_2 - \rho X_3}{2(1-\rho^2)},
+$$
+
+as given in the paper. 
+
+For $\rho=0$, 
+
+$$
+\beta=(0.5, 0.5, 0, \ldots, 0).
+$$
+
+For $\rho=0.3$,
+
+$$
+\beta_1=\frac{0.7}{1.82}=0.3846, \\
+\beta_2=\frac{0.79}{1.82}=0.4341, \\
+\beta_3=-\frac{0.3}{1.82}=-0.1648,
+$$
+giving approximately $(0.38,0.43,-0.16)$ as in the paper.
+
+For $\rho=0.5$,
+
+$$
+\beta_1=\frac{0.5}{1.5}=0.3333, \\
+\beta_2=\frac{0.75}{1.5}=0.5000, \\
+\beta_3=-\frac{0.5}{1.5}=-0.3333,
+$$  
+
+which matches the paper (all of the above values are in Table 1 of the paper). 
+
+
+
+$$
+R^2_{Y\cdot X} =
+0.5000,\quad 0.3725,\quad 0.3125
+$$
+
 
 - Can partially frame this around connections to intro Math/Stat theory (e.g. MVN results).
 
@@ -194,8 +374,8 @@ A place to add ideas for future pursuits, things we should be focusing on, etc.
 - Long term:  What about involving others?!  In particular, students could contribute around a specific paper as a capstone project. This might be a way to really grow what is covered in the package - new simulations/methods/study designs can be added by different contributors.
 - Other projects? Not necessarily sims but maybe can be rehashed to include them (maybe)
 
-  - LBP Markov Analysis Paper: revisit goals of this. This was the basis of your 2024 (?!) SDSS presentation and paper.  Has this been updated?
-  - I have a risk calculator paper draft for CTS (carpal tunnel syndrome). Maybe revisit this?
-  - 
+   - LBP Markov Analysis Paper: revisit goals of this. This was the basis of your 2024 (?!) SDSS presentation and paper.  Has this been updated?
+   - I have a risk calculator paper draft for CTS (carpal tunnel syndrome). Maybe revisit this?
+   - 
 
 
