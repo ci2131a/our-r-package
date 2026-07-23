@@ -7,7 +7,8 @@ embed-resources: true
 # Project Title Ideas
 
 - The Simulation Project (overall possible title - there may be subprojects with subtitles)
-
+- Package title: TheSimProject, SimProject, SimProj, Simulation, SimulationProject, TSP (already taken), TheSims
+- don't use TS as that is for time series
 
 # General Goals
 
